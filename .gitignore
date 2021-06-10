@@ -1,23 +1,19 @@
-# Compiled class file
+.DS_Store
+*.pyc
 *.class
+*.protoset
 
-# Log file
-*.log
+.hg/
+.hgignore
 
-# BlueJ files
-*.ctxt
+target/
+dead/
+thrift-0.14.1/
+gen-py/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+grpcio-py/*_pb2*.py
+grpcio-py/grpc/
+grpcio-py/pb2_grpc/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# vm crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.glowacki.grpc";
+option java_outer_classname = "DAQ";
+option objc_class_prefix = "DAQ";
+
+package daqclient;
+
+// The pDAQ client service definition.
+service DAQClient {
+    rpc commitSubrun(CommitSubrunRequest) returns (ClientReply);
+    rpc configure(ConfigureRequest) returns (ClientReply);
+    rpc connect(ConnectRequest) returns (ClientReply);
+    rpc startRun(StartRunRequest) returns (ClientReply);
+    rpc stopRun(EmptyRequest) returns (ClientReply);
+}
+
+message EmptyRequest {}
+
+message CommitSubrunRequest {
+    int32 subrun = 1;
+    string timeString = 2;
+}
+
+message ConfigureRequest {
+    string filename = 1;
+}
+
+message ConnectRequest {
+    message Connection {
+        string type = 1;
+        string compName = 2;
+        int32 compNum = 3;
+        string host = 4;
+        int32 port = 5;
+    }
+    repeated Connection connections = 1;
+}
+
+message StartRunRequest {
+    int32 runNum = 1;
+}
+
+// The response message from the remote procedure
+message ClientReply {
+    string result = 1;
+}

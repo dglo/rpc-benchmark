@@ -1,0 +1,3 @@
+#!/bin/sh
+
+thrift --gen py daqclient.thrift
