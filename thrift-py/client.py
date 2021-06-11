@@ -25,7 +25,7 @@ from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
 
 
-class WrappedClient(object):
+class WrappedClient(DAQClient.Client):
     def __init__(self, host, port):
         # initialize Thrift stuff
         socket = TSocket.TSocket(host , port)
@@ -33,24 +33,12 @@ class WrappedClient(object):
 
         # create client and connect to server
         protocol = TBinaryProtocol.TBinaryProtocol(self.transport)
-        self.client = DAQClient.Client(protocol)
+        super(WrappedClient, self).__init__(protocol)
 
         self.transport.open()
 
-    def configure(self, filename):
-        return self.client.configure(filename)
-
-    def connect(self, connections):
-        return self.client.connect(connections)
-
     def shutdown(self):
         self.transport.close()
-
-    def startRun(self, runnum):
-        return self.client.startRun(runnum)
-
-    def stopRun(self):
-        return self.client.stopRun()
 
 
 def create_client(host, port):
